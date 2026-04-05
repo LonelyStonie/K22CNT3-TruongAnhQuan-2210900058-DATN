@@ -1,11 +1,12 @@
 // ============================================
-// Trang Đăng nhập
-// File: frontend/src/pages/LoginPage.js
+// Trang Đăng nhập - CẬP NHẬT: Toast thay alert
+// File: frontend/src/pages/LoginPage.js — GHI ĐÈ
 // ============================================
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../components/Toast';
 import { authAPI } from '../services/api';
 
 function LoginPage() {
@@ -16,13 +17,13 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   const { login } = useAuth();
+  const toast = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    // Validate
     if (!email || !password) {
       setError('Vui lòng nhập email và mật khẩu');
       return;
@@ -31,9 +32,8 @@ function LoginPage() {
     setLoading(true);
     try {
       const data = await authAPI.login({ email, password });
-      // Lưu thông tin đăng nhập
       login(data.user, data.token);
-      // Chuyển hướng theo vai trò
+      toast.success(`Chào mừng ${data.user.fullname} quay trở lại!`);
       if (data.user.role === 'admin') {
         navigate('/admin');
       } else {
@@ -41,6 +41,7 @@ function LoginPage() {
       }
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -49,7 +50,6 @@ function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-container">
-        {/* Bên trái - Hình ảnh */}
         <div className="auth-banner">
           <div className="auth-banner-content">
             <div className="auth-banner-logo">UNCUT GEMS</div>
@@ -58,42 +58,24 @@ function LoginPage() {
           </div>
         </div>
 
-        {/* Bên phải - Form */}
         <div className="auth-form-wrapper">
           <div className="auth-form-inner">
             <h1 className="auth-title">Đăng nhập</h1>
             <p className="auth-subtitle">Nhập thông tin tài khoản của bạn</p>
 
-            {/* Hiện lỗi */}
             {error && <div className="auth-error">{error}</div>}
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Email</label>
-                <input
-                  type="email"
-                  placeholder="Nhập email của bạn"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="form-input"
-                />
+                <input type="email" placeholder="Nhập email của bạn" value={email} onChange={(e) => setEmail(e.target.value)} className="form-input" />
               </div>
 
               <div className="form-group">
                 <label>Mật khẩu</label>
                 <div className="password-wrapper">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Nhập mật khẩu"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="form-input"
-                  />
-                  <button
-                    type="button"
-                    className="password-toggle"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
+                  <input type={showPassword ? 'text' : 'password'} placeholder="Nhập mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)} className="form-input" />
+                  <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? '🙈' : '👁️'}
                   </button>
                 </div>
@@ -108,7 +90,6 @@ function LoginPage() {
               Chưa có tài khoản? <Link to="/register" className="auth-link">Đăng ký ngay</Link>
             </div>
 
-            {/* Tài khoản test */}
             <div className="auth-test-accounts">
               <p className="auth-test-title">Tài khoản test:</p>
               <div className="auth-test-item" onClick={() => { setEmail('admin@uncutgems.vn'); setPassword('admin123'); }}>

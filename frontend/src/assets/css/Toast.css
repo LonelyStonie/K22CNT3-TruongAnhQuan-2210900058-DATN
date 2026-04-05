@@ -1,0 +1,259 @@
+/* ============================================
+   TOAST NOTIFICATION
+   File: frontend/src/assets/css/Toast.css
+   ============================================ */
+
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 380px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.toast-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  position: relative;
+  overflow: hidden;
+  pointer-events: all;
+  animation: toastSlideIn 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.toast-closing {
+  animation: toastSlideOut 0.4s ease forwards;
+}
+
+@keyframes toastSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(60px); }
+}
+
+/* ===== Icon ===== */
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.toast-icon-success {
+  background: rgba(29, 158, 117, 0.15);
+  color: #1D9E75;
+  border: 1px solid rgba(29, 158, 117, 0.3);
+}
+
+.toast-icon-error {
+  background: rgba(226, 75, 74, 0.15);
+  color: #E24B4A;
+  border: 1px solid rgba(226, 75, 74, 0.3);
+}
+
+.toast-icon-info {
+  background: rgba(201, 168, 76, 0.15);
+  color: #C9A84C;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+.toast-icon-warning {
+  background: rgba(239, 159, 39, 0.15);
+  color: #EF9F27;
+  border: 1px solid rgba(239, 159, 39, 0.3);
+}
+
+/* ===== Body ===== */
+.toast-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.toast-message {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.5;
+}
+
+/* ===== Close Button ===== */
+.toast-close {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s;
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  color: #fff;
+}
+
+/* ===== Progress Bar ===== */
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toast-progress-bar {
+  height: 100%;
+  animation: toastProgress linear forwards;
+}
+
+@keyframes toastProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.toast-progress-success { background: #1D9E75; }
+.toast-progress-error { background: #E24B4A; }
+.toast-progress-info { background: #C9A84C; }
+.toast-progress-warning { background: #EF9F27; }
+
+/* ===== Border accent ===== */
+.toast-success { border-left: 3px solid #1D9E75; }
+.toast-error { border-left: 3px solid #E24B4A; }
+.toast-info { border-left: 3px solid #C9A84C; }
+.toast-warning { border-left: 3px solid #EF9F27; }
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .toast-container {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}
+
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.25s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-box {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: modalScaleIn 0.3s ease;
+}
+
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin: 0 auto 16px;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.modal-message {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 10px 24px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.modal-cancel {
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+}
+
+.modal-cancel:hover {
+  border-color: #555;
+  color: #ccc;
+}
+
+.modal-confirm {
+  color: #000;
+}
+
+.modal-confirm:hover {
+  opacity: 0.9;
+}

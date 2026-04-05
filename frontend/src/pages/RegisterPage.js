@@ -1,24 +1,20 @@
 // ============================================
-// Trang Đăng ký
-// File: frontend/src/pages/RegisterPage.js
+// Trang Đăng ký - CẬP NHẬT: Toast thay alert
+// File: frontend/src/pages/RegisterPage.js — GHI ĐÈ
 // ============================================
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useToast } from '../components/Toast';
 import { authAPI } from '../services/api';
 
 function RegisterPage() {
-  const [form, setForm] = useState({
-    fullname: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-  });
+  const [form, setForm] = useState({ fullname: '', email: '', password: '', confirmPassword: '', phone: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const toast = useToast();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,7 +25,6 @@ function RegisterPage() {
     e.preventDefault();
     setError('');
 
-    // Validate
     if (!form.fullname || !form.email || !form.password) {
       setError('Vui lòng điền đầy đủ họ tên, email và mật khẩu');
       return;
@@ -51,11 +46,11 @@ function RegisterPage() {
         password: form.password,
         phone: form.phone,
       });
-      // Đăng ký thành công → chuyển đến trang đăng nhập
-      alert('Đăng ký thành công! Vui lòng đăng nhập.');
+      toast.success('Đăng ký thành công! Vui lòng đăng nhập.');
       navigate('/login');
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -64,7 +59,6 @@ function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-container">
-        {/* Bên trái - Hình ảnh */}
         <div className="auth-banner">
           <div className="auth-banner-content">
             <div className="auth-banner-logo">UNCUT GEMS</div>
@@ -73,7 +67,6 @@ function RegisterPage() {
           </div>
         </div>
 
-        {/* Bên phải - Form */}
         <div className="auth-form-wrapper">
           <div className="auth-form-inner">
             <h1 className="auth-title">Đăng ký</h1>
@@ -84,73 +77,29 @@ function RegisterPage() {
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Họ và tên *</label>
-                <input
-                  type="text"
-                  name="fullname"
-                  placeholder="Nhập họ và tên"
-                  value={form.fullname}
-                  onChange={handleChange}
-                  className="form-input"
-                />
+                <input type="text" name="fullname" placeholder="Nhập họ và tên" value={form.fullname} onChange={handleChange} className="form-input" />
               </div>
-
               <div className="form-group">
                 <label>Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Nhập email"
-                  value={form.email}
-                  onChange={handleChange}
-                  className="form-input"
-                />
+                <input type="email" name="email" placeholder="Nhập email" value={form.email} onChange={handleChange} className="form-input" />
               </div>
-
               <div className="form-group">
                 <label>Số điện thoại</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Nhập số điện thoại"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="form-input"
-                />
+                <input type="tel" name="phone" placeholder="Nhập số điện thoại" value={form.phone} onChange={handleChange} className="form-input" />
               </div>
-
               <div className="form-group">
                 <label>Mật khẩu *</label>
                 <div className="password-wrapper">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    placeholder="Tối thiểu 6 ký tự"
-                    value={form.password}
-                    onChange={handleChange}
-                    className="form-input"
-                  />
-                  <button
-                    type="button"
-                    className="password-toggle"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
+                  <input type={showPassword ? 'text' : 'password'} name="password" placeholder="Tối thiểu 6 ký tự" value={form.password} onChange={handleChange} className="form-input" />
+                  <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? '🙈' : '👁️'}
                   </button>
                 </div>
               </div>
-
               <div className="form-group">
                 <label>Xác nhận mật khẩu *</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Nhập lại mật khẩu"
-                  value={form.confirmPassword}
-                  onChange={handleChange}
-                  className="form-input"
-                />
+                <input type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" value={form.confirmPassword} onChange={handleChange} className="form-input" />
               </div>
-
               <button type="submit" className="auth-submit" disabled={loading}>
                 {loading ? 'Đang xử lý...' : 'Đăng ký'}
               </button>

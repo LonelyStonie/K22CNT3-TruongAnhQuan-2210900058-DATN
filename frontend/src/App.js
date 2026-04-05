@@ -1,7 +1,6 @@
 // ============================================
-// App chính - CẬP NHẬT: Thêm trang Sản phẩm
-// File: frontend/src/App.js
-// GHI ĐÈ file App.js cũ
+// App chính - CẬP NHẬT: Thêm ToastProvider
+// File: frontend/src/App.js — GHI ĐÈ
 // ============================================
 
 import React from 'react';
@@ -11,9 +10,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './assets/css/App.css';
 import './assets/css/Auth.css';
 import './assets/css/Products.css';
+import './assets/css/Toast.css';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
+import { ToastProvider } from './components/Toast';
 
 // Components
 import Navbar from './components/Navbar';
@@ -29,21 +30,23 @@ import ProductDetailPage from './pages/ProductDetailPage';
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div className="App">
-          <Navbar />
+      <ToastProvider>
+        <Router>
+          <div className="App">
+            <Navbar />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:id" element={<ProductDetailPage />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
+            </Routes>
 
-          <Footer />
-        </div>
-      </Router>
+            <Footer />
+          </div>
+        </Router>
+      </ToastProvider>
     </AuthProvider>
   );
 }
