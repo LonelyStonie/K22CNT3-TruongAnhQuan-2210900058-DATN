@@ -1,41 +1,44 @@
+// ============================================
+// App chính - Router + AuthProvider
+// File: frontend/src/App.js
+// ============================================
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import CSS
+// CSS
 import './assets/css/App.css';
+import './assets/css/Auth.css';
 
-// Import Components
+// Context
+import { AuthProvider } from './context/AuthContext';
+
+// Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// Import Pages
+// Pages
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        {/* Thanh điều hướng - hiển thị trên mọi trang */}
-        <Navbar />
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Navbar />
 
-        {/* Nội dung trang - thay đổi theo URL */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* Các trang khác sẽ thêm sau */}
-          {/* <Route path="/products" element={<ProductsPage />} /> */}
-          {/* <Route path="/products/:id" element={<ProductDetailPage />} /> */}
-          {/* <Route path="/cart" element={<CartPage />} /> */}
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          {/* <Route path="/register" element={<RegisterPage />} /> */}
-          {/* <Route path="/blog" element={<BlogPage />} /> */}
-          {/* <Route path="/contact" element={<ContactPage />} /> */}
-          {/* <Route path="/admin" element={<AdminDashboard />} /> */}
-        </Routes>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
 
-        {/* Footer - hiển thị trên mọi trang */}
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

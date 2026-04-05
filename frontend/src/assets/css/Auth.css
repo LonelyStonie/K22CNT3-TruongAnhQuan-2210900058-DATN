@@ -1,0 +1,289 @@
+/* ============================================
+   AUTH PAGES - Đăng nhập / Đăng ký
+   File: frontend/src/assets/css/Auth.css
+   ============================================ */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark);
+  padding: 20px;
+}
+
+.auth-container {
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  min-height: 600px;
+  border: 1px solid #1a1a1a;
+  overflow: hidden;
+}
+
+/* ===== Bên trái: Banner ===== */
+.auth-banner {
+  flex: 1;
+  background: linear-gradient(135deg, #1a1510 0%, #0a0a0a 50%, #111 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-banner::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-banner::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-banner-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-banner-logo {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.auth-banner-content h2 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.auth-banner-content p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #888;
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+/* ===== Bên phải: Form ===== */
+.auth-form-wrapper {
+  flex: 1;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.auth-form-inner {
+  width: 100%;
+  max-width: 360px;
+}
+
+.auth-title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.auth-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 28px;
+}
+
+/* ===== Error Message ===== */
+.auth-error {
+  background: rgba(226, 75, 74, 0.1);
+  border: 1px solid rgba(226, 75, 74, 0.3);
+  color: #E24B4A;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+/* ===== Form Groups ===== */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #aaa;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: var(--gold);
+}
+
+.form-input::placeholder {
+  color: #555;
+}
+
+/* ===== Password Toggle ===== */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .form-input {
+  padding-right: 44px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ===== Submit Button ===== */
+.auth-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+
+.auth-submit:hover {
+  background: var(--gold-light);
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Footer Link ===== */
+.auth-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #888;
+}
+
+.auth-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== Test Accounts ===== */
+.auth-test-accounts {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #1a1a1a;
+}
+
+.auth-test-title {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #555;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.auth-test-item {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #666;
+  padding: 6px 10px;
+  background: #111;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.auth-test-item:hover {
+  border-color: var(--gold);
+  color: #aaa;
+}
+
+.auth-test-item span {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+  .auth-banner {
+    padding: 30px;
+    min-height: 200px;
+  }
+  .auth-banner-content h2 {
+    font-size: 20px;
+  }
+  .auth-form-wrapper {
+    padding: 30px 20px;
+  }
+}
