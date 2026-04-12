@@ -1,5 +1,5 @@
 // ============================================
-// App chính - CẬP NHẬT: Thêm ToastProvider
+// App chính - CẬP NHẬT: Thêm Giỏ hàng, Checkout, Đơn hàng
 // File: frontend/src/App.js — GHI ĐÈ
 // ============================================
 
@@ -11,6 +11,7 @@ import './assets/css/App.css';
 import './assets/css/Auth.css';
 import './assets/css/Products.css';
 import './assets/css/Toast.css';
+import './assets/css/Cart.css';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
@@ -26,6 +27,9 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrdersPage from './pages/OrdersPage';
 
 function App() {
   return (
@@ -41,6 +45,9 @@ function App() {
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/products/:id" element={<ProductDetailPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/orders" element={<OrdersPage />} />
             </Routes>
 
             <Footer />
