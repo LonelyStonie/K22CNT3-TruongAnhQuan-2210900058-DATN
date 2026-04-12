@@ -109,8 +109,12 @@ function ProductDetailPage() {
           {/* Gallery */}
           <div className="detail-gallery">
             <div className="gallery-main">
-              <div className="gallery-placeholder">
+            <div className="gallery-placeholder">
+              {product.image_url ? (
+                <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
                 <div className="gallery-diamond" />
+              )}
                 {discount > 0 && <div className="gallery-sale">-{discount}%</div>}
               </div>
             </div>

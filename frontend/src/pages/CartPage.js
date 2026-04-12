@@ -101,9 +101,13 @@ function CartPage() {
               {items.map((item) => (
                 <div className="cart-item" key={item.id}>
                   <div className="col-product">
-                    <div className="cart-item-image">
+                  <div className="cart-item-image">
+                    {item.image_url ? (
+                      <img src={item.image_url} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
                       <div className="cart-item-placeholder" />
-                    </div>
+                    )}
+                  </div>
                     <div className="cart-item-info">
                       <Link to={`/products/${item.product_id}`} className="cart-item-name">
                         {item.name}

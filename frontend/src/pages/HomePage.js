@@ -17,16 +17,6 @@ const categories = [
   { name: 'Mặt dây chuyền', icon: '🔶', count: 22, slug: 'mat-day-chuyen' },
 ];
 
-const products = [
-  { id: 1, name: 'Nhẫn Kim Cương Eternal', price: '45.900.000', original: '52.000.000', material: 'Vàng 18K', stone: 'Kim cương', badge: 'featured', color: '#1a1a2e' },
-  { id: 2, name: 'Dây Chuyền Sapphire Royal', price: '38.500.000', material: 'Bạch kim', stone: 'Sapphire', badge: 'new', color: '#16213e' },
-  { id: 3, name: 'Vòng Tay Ruby Passion', price: '29.800.000', material: 'Vàng hồng 18K', stone: 'Ruby', badge: 'featured', color: '#1a1a2e' },
-  { id: 4, name: 'Khuyên Tai Ngọc Trai Pearl Drop', price: '15.200.000', material: 'Bạc 925', stone: 'Ngọc trai', badge: 'new', color: '#16213e' },
-  { id: 5, name: 'Nhẫn Emerald Garden', price: '52.300.000', material: 'Vàng 18K', stone: 'Ngọc lục bảo', badge: '', color: '#1a1a2e' },
-  { id: 6, name: 'Dây Chuyền Diamond Infinity', price: '68.000.000', original: '75.000.000', material: 'Bạch kim', stone: 'Kim cương', badge: 'featured', color: '#16213e' },
-  { id: 7, name: 'Vòng Tay Topaz Serenity', price: '18.900.000', material: 'Vàng 14K', stone: 'Topaz', badge: 'new', color: '#1a1a2e' },
-  { id: 8, name: 'Bộ Trang Sức Diamond Suite', price: '125.000.000', material: 'Bạch kim', stone: 'Kim cương', badge: 'featured', color: '#16213e' },
-];
 
 const blogs = [
   { id: 1, title: 'Xu hướng trang sức 2025: Vàng hồng lên ngôi', date: '25/03/2025', views: 1240 },
@@ -36,6 +26,14 @@ const blogs = [
 
 function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+useEffect(() => {
+  fetch('http://localhost:5000/api/products?featured=1&limit=8')
+    .then(res => res.json())
+    .then(data => { if (data.products) setFeaturedProducts(data.products); })
+    .catch(console.error);
+}, []);
 
   // Tự động chuyển slide mỗi 5 giây
   useEffect(() => {
@@ -99,20 +97,24 @@ function HomePage() {
           <div className="section-divider" />
         </div>
         <div className="product-grid">
-          {products.map((product) => (
+          {featuredProducts.map((product) => (
             <Link to={`/products/${product.id}`} key={product.id}>
               <div className="product-card">
-                <div className="product-image" style={{ background: `linear-gradient(135deg, ${product.color}, #0d0d0d)` }}>
+              <div className="product-image" style={{ background: `linear-gradient(135deg, #1a1a2e, #0d0d0d)` }}>
+                {product.image_url ? (
+                  <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
                   <div className="product-placeholder" />
-                  {product.badge === 'featured' && <div className="product-badge featured">Nổi bật</div>}
-                  {product.badge === 'new' && <div className="product-badge new">Mới</div>}
+                )}
+                  {product.is_featured === 1 && <div className="product-badge featured">Nổi bật</div>}
+                  {product.is_new === 1 && <div className="product-badge new">Mới</div>}
                 </div>
                 <div className="product-info">
-                  <div className="product-stone">{product.stone} • {product.material}</div>
+                  <div className="product-stone">{product.stone_name || 'Trang sức'} • {product.material_name || 'Kim loại quý'}</div>
                   <div className="product-name">{product.name}</div>
                   <div>
-                    <span className="product-price">{product.price}₫</span>
-                    {product.original && <span className="product-original">{product.original}₫</span>}
+                    <span className="product-price">{Number(product.price).toLocaleString('vi-VN')}₫</span>
+                      {product.original_price && product.original_price > product.price && <span className="product-original">{Number(product.original_price).toLocaleString('vi-VN')}₫</span>}
                   </div>
                   <button className="product-btn" onClick={(e) => { e.preventDefault(); alert('Đã thêm vào giỏ hàng!'); }}>
                     Thêm vào giỏ hàng

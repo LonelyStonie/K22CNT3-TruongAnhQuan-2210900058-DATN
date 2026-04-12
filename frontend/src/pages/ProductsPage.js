@@ -240,8 +240,12 @@ function ProductsPage() {
               {products.map(product => (
                 <Link to={`/products/${product.id}`} key={product.id} className="product-card-link">
                   <div className="product-card">
-                    <div className="product-image" style={{ background: `linear-gradient(135deg, #1a1a2e, #0d0d0d)` }}>
+                  <div className="product-image" style={{ background: `linear-gradient(135deg, #1a1a2e, #0d0d0d)` }}>
+                    {product.image_url ? (
+                      <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
                       <div className="product-placeholder" />
+                    )}
                       {product.is_featured === 1 && <div className="product-badge featured">Nổi bật</div>}
                       {product.is_new === 1 && <div className="product-badge new">Mới</div>}
                       {product.original_price && product.original_price > product.price && (
