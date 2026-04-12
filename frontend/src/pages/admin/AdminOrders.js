@@ -102,6 +102,9 @@ function AdminOrders() {
             <Link to="/admin/products" className="admin-nav-item">📦 Sản phẩm</Link>
             <Link to="/admin/orders" className="admin-nav-item active">🛒 Đơn hàng</Link>
             <Link to="/admin/customers" className="admin-nav-item">👥 Khách hàng</Link>
+            <Link to="/admin/statistics" className="admin-nav-item">📈 Thống kê</Link>
+            <Link to="/admin/banners" className="admin-nav-item">🖼️ Banner</Link>
+            <Link to="/admin/blogs" className="admin-nav-item">📝 Blog</Link>
             <div className="admin-nav-divider" />
             <Link to="/" className="admin-nav-item">🏠 Về trang chủ</Link>
           </nav>
