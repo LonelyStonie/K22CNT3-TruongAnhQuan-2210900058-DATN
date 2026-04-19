@@ -362,3 +362,9 @@ CREATE TABLE system_settings (
     description VARCHAR(255) COMMENT 'Mô tả cài đặt',
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) COMMENT = 'Bảng cài đặt và cấu hình hệ thống';
+
+SELECT id, name, image_url FROM products;
+UPDATE products SET image_url = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600' WHERE id = 1;
+UPDATE products SET image_url = 'https://images.unsplash.com/photo-1515562141589-67f0d999b7f6?w=800' WHERE id = 8;
+UPDATE products SET image_url = 'https://images.unsplash.com/photo-1609587312208-cea54be969e7?w=600' WHERE id = 8;
+UPDATE products SET image_url = 'https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' WHERE id = 8;

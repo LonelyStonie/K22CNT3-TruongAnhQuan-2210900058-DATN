@@ -242,7 +242,7 @@ function ProductsPage() {
                   <div className="product-card">
                   <div className="product-image" style={{ background: `linear-gradient(135deg, #1a1a2e, #0d0d0d)` }}>
                     {product.image_url ? (
-                      <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+<img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.onerror = null; e.target.src = ''; e.target.style.display = 'none'; }} />
                     ) : (
                       <div className="product-placeholder" />
                     )}

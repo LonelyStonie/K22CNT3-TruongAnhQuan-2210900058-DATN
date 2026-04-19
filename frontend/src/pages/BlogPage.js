@@ -56,9 +56,13 @@ function BlogPage() {
             {/* Featured post (bài đầu tiên) */}
             <div className="blog-featured">
               <div className="blog-featured-image">
-                <div className="blog-featured-placeholder">
-                  <span>📰</span>
-                </div>
+            <div className="blog-featured-placeholder">
+              {blogs[0].thumbnail ? (
+                <img src={blogs[0].thumbnail} alt={blogs[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <span>📰</span>
+              )}
+            </div>
                 {blogs[0].tags && <div className="blog-featured-tag">{blogs[0].tags.split(',')[0]}</div>}
               </div>
               <div className="blog-featured-info">
@@ -83,7 +87,13 @@ function BlogPage() {
                   {blogs.slice(1).map(blog => (
                     <div className="blog-card-full" key={blog.id}>
                       <div className="blog-card-image">
-                        <div className="blog-card-placeholder">📰</div>
+                      <div className="blog-card-placeholder">
+                        {blog.thumbnail ? (
+                          <img src={blog.thumbnail} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                          '📰'
+                        )}
+                      </div>
                         {blog.tags && <div className="blog-card-tag">{blog.tags.split(',')[0]}</div>}
                       </div>
                       <div className="blog-card-body">
